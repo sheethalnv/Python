@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{%block content%}
+<div class="container">
+    <div class="col-md-12">
+        <div class="banner">
+           <div class="banner-title">
+               <h1><b>ToDo</b></h1>
+           </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+   <form method="post" class="p-3 shadow">
+    {%csrf_token%}
+       <div class="form-group">
+        <input type="text" name="tname" class="form-control" placeholder="Enter task name"><br>
+       </div>
+        <div class="form-group">
+        <input type="text" name="priority" class="form-control" placeholder="Enter Priority"><br>
+       </div>
+       <div class="form-group">
+        <input type="date" name="date" class="form-control" ><br>
+       </div>
+
+<input type="submit" class="btn btn-success">
+</form>
+            </div>
+        <div class="col-md-6">
+            <h4><b style="color:red">Task To Be Completed</b></h4>
+            {% for i in task1 %}
+            <div class=" shadow card" >
+  <div class="card-body">
+    <h5 class="card-title">{{i.name}}</h5>
+
+    <p class="card-text">{{i.priority}}</p>
+      <p class="card-text">{{i.date}}</p>
+    <a class="btn btn-danger" href="{% url 'todoapp:delete' i.id %}">Done</a>
+       <a class="btn btn-success" href="{% url 'todoapp:update' i.id %}">Update</a>
+  </div>
+</div><br>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+{%endblock%}
